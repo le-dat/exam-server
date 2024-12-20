@@ -10,11 +10,15 @@ const app = express()
 connectMongoDB()
 
 const corsOptions = {
-  origin: 'https://lession-exam.vercel.app', 
-  optionsSuccessStatus: 200
-};
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://lession-exam.vercel.app',
+  ],
+  optionsSuccessStatus: 200,
+}
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 
 // Middleware to parse JSON bodies
 app.use(helmet())
@@ -23,7 +27,6 @@ app.use(express.urlencoded({ extended: true }))
 
 // logging
 app.use(morgan('combined'))
-
 
 // Define a basic route
 app.use('/api/auth', routes.authRoutes)
