@@ -12,9 +12,9 @@ import { authenticateToken } from '../middleware/auth.middleware'
 const userRoutes = Router()
 
 userRoutes.get('/me', authenticateToken, me)
+userRoutes.get('/:id', authenticateToken, getUser)
 userRoutes.get('/', authenticateToken, getAllUsers)
 userRoutes.post('/', authenticateToken, createUser)
-userRoutes.get('/:id', authenticateToken, getUser)
 userRoutes.put('/:id', authenticateToken, updateUser)
 userRoutes.delete('/:id', authenticateToken, deleteUser)
 
