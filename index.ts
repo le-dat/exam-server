@@ -28,6 +28,10 @@ app.use('/api/user', routes.userRoutes)
 app.use('/api/exam', routes.examRoutes)
 app.use('/api/question', routes.questionRoutes)
 
+app.get('/', (req, res) => {
+  res.send('Welcome to exam server!')
+})
+
 // Start the server
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port http://localhost:${process.env.PORT}`)
