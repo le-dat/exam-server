@@ -7,6 +7,9 @@ interface IQuestion extends Document {
   difficulty: string
   explanation?: string
   type: string
+  grade: string,
+  subject: string,
+  level: string
 }
 
 const questionSchema = new Schema<IQuestion>(
@@ -17,6 +20,9 @@ const questionSchema = new Schema<IQuestion>(
     difficulty: { type: String, required: true },
     explanation: { type: String },
     type: { type: String, required: true },
+    grade: { type: String, required: true },
+    subject: { type: String, required: true },
+    level: { type: String, required: true }
   },
   {
     timestamps: true,

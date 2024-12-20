@@ -110,14 +110,14 @@ export const getRandomQuestionsByDifficulty = async (
   res: Response
 ) => {
   try {
-    const { easySize, mediumSize, hardSize } = req.body
+    const { easySize, mediumSize, hardSize, subject } = req.body
     const difficulties = ['easy', 'medium', 'hard']
     const sizes = [easySize, mediumSize, hardSize]
 
     const questions = await Promise.all(
       difficulties.map((difficulty, index) =>
         QuestionModel.aggregate([
-          { $match: { difficulty } },
+          { $match: { difficulty, subject } },
           { $sample: { size: parseInt(sizes[index], 10) } },
         ])
       )
@@ -131,12 +131,10 @@ export const getRandomQuestionsByDifficulty = async (
         .json({ message: 'No questions found for the specified difficulties' })
     }
 
-    return res
-      .status(200)
-      .json({
-        data: combinedQuestions,
-        message: 'Questions fetched successfully',
-      })
+    return res.status(200).json({
+      data: combinedQuestions,
+      message: 'Questions fetched successfully',
+    })
   } catch (error) {
     console.error(error)
     return res.status(500).json({ message: 'Error fetching questions', error })
