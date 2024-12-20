@@ -9,9 +9,15 @@ require('dotenv').config()
 const app = express()
 connectMongoDB()
 
+const corsOptions = {
+  origin: 'https://lession-exam.vercel.app', 
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 // Middleware to parse JSON bodies
 app.use(helmet())
-app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
