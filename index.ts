@@ -3,7 +3,6 @@ import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
 import { connectMongoDB } from './database/database'
-import { setupSwagger } from './doc/swagger'
 import routes from './routes'
 require('dotenv').config()
 
@@ -19,8 +18,6 @@ app.use(express.urlencoded({ extended: true }))
 // logging
 app.use(morgan('combined'))
 
-// Setup Swagger
-setupSwagger(app)
 
 // Define a basic route
 app.use('/api/auth', routes.authRoutes)
